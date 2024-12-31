@@ -1,4 +1,10 @@
 <?php
+session_start();
+if (!isset($_SESSION['admin_id'])) {
+    // إذا لم يكن المستخدم قد سجل الدخول، إعادة التوجيه إلى صفحة تسجيل الدخول
+    header("Location: adminlogin.php");
+    exit;
+  }
 // Database connection
 $servername = "localhost";
 $username = "root"; // Replace with your database username

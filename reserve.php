@@ -1,4 +1,5 @@
 <?php
+
 // Database connection
 $servername = "localhost";
 $username = "root";
@@ -17,7 +18,8 @@ if (isset($_GET['car_id'])) {
     $car_id = $_GET['car_id'];
 
     // Fetch car details
-    $stmt = $conn->prepare("SELECT company, model, year, fuel_type, no_seats, price_per_day FROM cars WHERE car_id = ?");
+    //$stmt = $conn->prepare("SELECT company, model, year, fuel_type, no_seats, price_per_day FROM cars WHERE car_id = ?");
+    $stmt = $conn->prepare("SELECT company, model, year, fuel_type, no_seats, price_per_day , city , location FROM cars c ,office o WHERE c.office_id = o.office_id AND car_id = ?");
     $stmt->bind_param("i", $car_id);
     $stmt->execute();
     $result = $stmt->get_result();
@@ -33,7 +35,7 @@ if (isset($_GET['car_id'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reserve Car</title>
-    <link rel="stylesheet" href="styles1.css">
+    <link rel="stylesheet" href="reserve.css">
 </head>
 <body>
     <div class="container">
@@ -48,6 +50,8 @@ if (isset($_GET['car_id'])) {
             <p><strong>Fuel Type:</strong> <?= htmlspecialchars($car['fuel_type']) ?></p>
             <p><strong>No. of Seats:</strong> <?= htmlspecialchars($car['no_seats']) ?></p>
             <p><strong>Price per Day:</strong> $<?= number_format($car['price_per_day'], 2) ?></p>
+            <p><strong>city:</strong> <?= htmlspecialchars($car['city']) ?></p>
+            <p><strong>office location:</strong> <?= htmlspecialchars($car['location']) ?></p>
         </div>
 
         <!-- Reservation Form -->
@@ -77,29 +81,49 @@ if (isset($_GET['car_id'])) {
         </form>
     </div>
 
+    
     <script>
-        const pricePerDay = <?= $car['price_per_day'] ?>;
-        const pickupDateInput = document.getElementById('pickupDate');
-        const returnDateInput = document.getElementById('returnDate');
-        const totalPaymentDisplay = document.getElementById('totalPayment');
+    const pricePerDay = <?= $car['price_per_day'] ?>;
+    const pickupDateInput = document.getElementById('pickupDate');
+    const returnDateInput = document.getElementById('returnDate');
+    const totalPaymentDisplay = document.getElementById('totalPayment');
 
-        function calculateTotal() {
-            const pickupDate = new Date(pickupDateInput.value);
-            const returnDate = new Date(returnDateInput.value);
+    // Set minimum dates to today's date
+    const today = new Date().toISOString().split('T')[0];
+    pickupDateInput.setAttribute('min', today);
+    returnDateInput.setAttribute('min', today);
 
-            if (pickupDate && returnDate && returnDate > pickupDate) {
+    function calculateTotal() {
+        const pickupDate = new Date(pickupDateInput.value);
+        const returnDate = new Date(returnDateInput.value);
+
+        if (pickupDate && returnDate) {
+            if (returnDate < pickupDate) {
+                alert("Return Date cannot be earlier than Pick-Up Date.");
+                returnDateInput.value = ""; // Reset return date field
+                totalPaymentDisplay.textContent = "0.00";
+                return;
+            }
+
+            if (returnDate > pickupDate) {
                 const diffTime = returnDate - pickupDate;
                 const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
                 const totalPayment = diffDays * pricePerDay;
                 totalPaymentDisplay.textContent = totalPayment.toFixed(2);
-            } else {
-                totalPaymentDisplay.textContent = "0.00";
             }
         }
+    }
 
-        pickupDateInput.addEventListener('change', calculateTotal);
-        returnDateInput.addEventListener('change', calculateTotal);
-    </script>
+    pickupDateInput.addEventListener('change', () => {
+        // Update the minimum return date to match the selected pickup date
+        const pickupDate = pickupDateInput.value;
+        returnDateInput.setAttribute('min', pickupDate);
+        calculateTotal();
+    });
+
+    returnDateInput.addEventListener('change', calculateTotal);
+</script>
+
 </body>
 </html>
 

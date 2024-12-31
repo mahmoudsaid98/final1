@@ -1,4 +1,10 @@
 <?php
+session_start();
+if (!isset($_SESSION['admin_id'])) {
+    // إذا لم يكن المستخدم قد سجل الدخول، إعادة التوجيه إلى صفحة تسجيل الدخول
+    header("Location: adminlogin.php");
+    exit;
+  }
 // اتصال بقاعدة البيانات
 $servername = "localhost"; // اسم المضيف
 $username = "root"; // اسم المستخدم الافتراضي لـ XAMPP

@@ -1,11 +1,7 @@
 <?php
 session_start();
 
-// Check if the user is logged in
-if (!isset($_SESSION['user_id'])) {
-    header("Location: login.php");
-    exit;
-}
+// Check if the user is logged i
 
 $customer_id = $_SESSION['user_id']; // Get customer_id from the session
 
@@ -21,7 +17,7 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+try {
     $car_id = $_POST['car_id'];
     $pickup_date = $_POST['pickup_date'];
     $return_date = $_POST['return_date'];
@@ -50,20 +46,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         // Insert payment
         $sql_payment = "INSERT INTO payments (reservation_id, cash, PaymentMethod, PaymentStatus)
-                        VALUES (?, ?, ?, 'Pending')";
+                        VALUES (?, ?, ?, 'completed')";
         $stmt_payment = $conn->prepare($sql_payment);
         $stmt_payment->bind_param("ids", $reservation_id, $total_payment, $payment_method);
 
         if ($stmt_payment->execute()) {
-            echo "Reservation confirmed! Total Payment: $" . $total_payment;
+            echo "<script>alert('Reservation confirmed! Total Payment: $".$total_payment."'); window.location.href = 'show.html';</script>";
         } else {
-            echo "Error in payment: " . $stmt_payment->error;
+            echo "<script>alert('Error in payment: ".$stmt_payment->error."');</script>";
         }
         $stmt_payment->close();
     } else {
-        echo "Error in reservation: " . $stmt->error;
+        echo "<script>alert('This car is already booked for the selected dates.');</script>";
     }
     $stmt->close();
+} catch (Exception $e) {
+    echo "<script>alert('Error: ".$e->getMessage()."');</script>";
 }
 $conn->close();
 ?>
