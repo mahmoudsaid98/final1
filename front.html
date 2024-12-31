@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Rental Reports</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #3b3b3b;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background: #212121;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: cyan;
+        }
+
+        form {
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #ffffff;
+        }
+
+        input, select {
+            width: 98%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            background: linear-gradient(45deg, #00c6ff, #0072ff, #8e2de2); /* Vibrant gradient with cool tones */
+            color: white; /* Text color */
+            border: 2px solid transparent; /* Transparent border */
+            padding: 10px; /* Uniform padding */
+            width: 93%; /* Wider width */
+            margin-left: 40px;
+            font-size: 18px; /* Larger font size */
+            text-align: center; /* Center text */
+            text-decoration: none; /* Remove underline */
+            display: inline-block; /* Allow button to adjust its size */
+            cursor: pointer; /* Pointer cursor on hover */
+            transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease; /* Smooth transitions */
+            border-radius: 5px; /* Rounded corners */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Soft shadow for depth */
+        }
+
+        /* Hover Animation */
+        button:hover {
+            transform: scale(1.1); /* Slightly increase size */
+            background: linear-gradient(45deg, #388bb8, #0b4168, #00b8d4); /* Change to another vibrant gradient */
+            box-shadow: 0 0 20px rgba(26, 145, 213, 0.992); /* Glow effect on hover */
+        }
+
+        /* Focus Effect for Accessibility */
+        button:focus {
+            outline: none; /* Remove default outline */
+            box-shadow: 0 0 20px rgba(0, 0, 255, 0.7); /* Glow effect for accessibility focus */
+        }
+
+        .Back {
+            display: flex; /* Use flexbox */
+            justify-content: space-between; /* Space out the button and heading */
+            align-items: center; /* Vertically align items */
+            margin-top: 20px; /* Add spacing above */
+            margin-bottom: 15px;
+            
+        }
+
+        .Back h1 {
+            flex-grow: 1; /* Allow the heading to take up available space */
+            text-align: center; /* Center the heading text */
+            margin: 0; /* Remove default margin */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="Back">
+            <a href="Adminchoise.html">
+                <button type="button">Back</button>
+            </a>
+            <h1>Car Rental Reports</h1>
+        </div>
+        <!-- Reservations within a period -->
+        <form method="GET" action="report.php">
+            <div class="form-group">
+                <label for="start_date">Start Date:</label>
+                <input type="date" id="start_date" name="start_date" required>
+            </div>
+            <div class="form-group">
+                <label for="end_date">End Date:</label>
+                <input type="date" id="end_date" name="end_date" required>
+            </div>
+            <button type="submit" name="action" value="reservations_period">View Reservations</button>
+        </form>
+
+        <!-- Status of all cars on a specific day -->
+        <form method="GET" action="report.php">
+            <div class="form-group">
+                <label for="status_date">Date:</label>
+                <input type="date" id="status_date" name="status_date" required>
+            </div>
+            <button type="submit" name="action" value="car_status">View Car Status</button>
+        </form>
+
+        <!-- Reservations of a specific customer -->
+        <form method="GET" action="report.php">
+            <div class="form-group">
+                <label for="customer_id">Customer ID:</label>
+                <input type="number" id="customer_id" name="customer_id" required>
+            </div>
+            <button type="submit" name="action" value="customer_reservations">View Customer Reservations</button>
+        </form>
+
+        <!-- Payments within a specific period -->
+        <form method="GET" action="report.php">
+            <div class="form-group">
+                <label for="payment_start_date">Start Date:</label>
+                <input type="date" id="payment_start_date" name="payment_start_date" required>
+            </div>
+            <div class="form-group">
+                <label for="payment_end_date">End Date:</label>
+                <input type="date" id="payment_end_date" name="payment_end_date" required>
+            </div>
+            <button type="submit" name="action" value="daily_payments">View Payments</button>
+        </form>
+    </div>
+</body>
+</html>

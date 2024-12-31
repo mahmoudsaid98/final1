@@ -1,0 +1,138 @@
+/* Form Container */
+form {
+    max-width: 400px; /* Limit the form's width */
+    margin: 0 auto; /* Center the form */
+    padding: 20px; /* Add padding inside the form */
+    border: 2px solid #1644cf; /* Light border for structure */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 0 10px rgb(0, 17, 255); /* Subtle shadow */
+    background: #212121; /* Light background color */
+    font-family: Arial, sans-serif; /* Clean font */
+    height:100%;
+}
+
+
+body{
+    background-color: #3b3b3b;
+}
+
+
+#Button2 {
+    position: absolute; /* Position the button relative to the page */
+    top: 10px; /* Distance from the top of the page */
+    left: 10px; /* Distance from the right edge of the page */
+    background: linear-gradient(45deg, #00c6ff, #0072ff, #8e2de2); /* Gradient background */
+    color: white; /* Text color */
+    border: none; /* Remove border */
+    padding: 10px 20px; /* Padding for better appearance */
+    font-size: 16px; /* Font size */
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transitions */
+}
+
+/* Hover effect */
+#Button2:hover {
+    transform: scale(1.1);  
+    box-shadow: 0 0 10px rgba(0, 114, 255, 0.5); /* Glow effect */
+}
+#Button2:focus {
+    outline: none;  
+    box-shadow: 0 0 20px rgba(0, 0, 255, 0.7); /* Glow effect */
+}
+
+/* Ensure the link doesn't interfere with the button's appearance */
+a {
+    text-decoration: none; /* Remove underline from link */
+}
+/* Flex container */
+.buttons {
+    display: flex; /* Use flexbox */
+    justify-content: center; /* Center horizontally */
+    gap: 20px; /* Space between buttons */
+    margin-top: 20px; /* Add spacing above */
+}
+
+/* Flex buttons styled */
+#button1{
+    background: linear-gradient(45deg, #00c6ff, #0072ff, #8e2de2);
+    color: white;
+    border: 2px solid transparent;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+/* Hover effect */
+#button1:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 10px rgba(0, 114, 255, 0.5);
+}
+    
+/* Input and Select Fields */
+input[type="text"],
+input[type="number"],
+select {
+    
+    color: white;
+    background-color: #212121;
+    width: 95%; /* Full width */
+    padding: 10px; /* Add padding for better usability */
+    margin: 10px 0; /* Spacing between fields */
+    border: 1px solid #9f969e; /* Light border */
+    border-radius: 5px; /* Rounded corners */
+    font-size: 16px; /* Font size */
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    transition: border 0.3s ease, box-shadow 0.3s ease; /* Smooth transitions */
+}
+
+/* Hover and Focus Effects for Inputs */
+input[type="text"]:hover,
+input[type="number"]:hover,
+select:hover,
+input[type="text"]:focus,
+input[type="number"]:focus,
+select:focus {
+    border: 1px solid #0072ff; /* Highlighted border color */
+    box-shadow: 0 0 8px rgba(0, 114, 255, 0.5); /* Glow effect */
+    outline: none; /* Remove default outline */
+}
+
+/* Labels */
+label {
+    font-size: 14px; /* Label font size */
+    margin-bottom: 5px; /* Add spacing below labels */
+    display: block; /* Block layout for alignment */
+    color: #555; /* Subtle text color */
+}
+input[type="text"]{color: #fbfdff;}
+
+/* Submit Button */
+input[type="submit"] {
+    background: linear-gradient(45deg, #00c6ff, #0072ff, #8e2de2); /* Vibrant gradient */
+    color: white; /* Text color */
+    border: 2px solid transparent; /* Transparent border */
+    padding: 12px ;
+    width: 75%; /* Padding for button */
+    font-size: 18px; /* Font size */
+    cursor: pointer; /* Pointer cursor */
+    border-radius: 5px; /* Rounded corners */
+    transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease; /* Smooth transitions */
+    text-align: center; /* Center text */
+    display: block; /* Center align the button */
+    margin: 20px auto 0; /* Space above and center-align button */
+}
+
+/* Hover and Focus Effects for Submit Button */
+input[type="submit"]:hover {
+    transform: scale(1.1); /* Slightly increase size */
+    background: linear-gradient(45deg, #388bb8, #0b4168, #00b8d4); /* Change to another vibrant gradient */
+    box-shadow: 0 0 20px rgba(26, 145, 213, 0.992); /* Glow effect */
+}
+
+input[type="submit"]:focus {
+    outline: none; /* Remove default outline */
+    box-shadow: 0 0 20px rgba(0, 0, 255, 0.7); /* Glow effect */
+}
